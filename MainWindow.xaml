@@ -1,0 +1,44 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        x:Class="Lesson7.MainWindow"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="625"
+        DataContext="{Binding Main,Source={StaticResource Locator}}">
+
+    <Grid x:Name="grid">
+        <DataGrid
+            x:Name="dataGrid"
+            ColumnWidth="*"
+            RowHeight="20"
+            SelectionUnit="FullRow"
+            AutoGenerateColumns="False"
+            ItemsSource="{Binding ItemCollection}"
+            SelectedItem="{Binding ItemSelected,Mode=TwoWay}">
+            <DataGrid.Columns>
+                <DataGridTextColumn 
+                    Header="ID" 
+                    Binding="{Binding Id,Mode=TwoWay}"
+                    />
+                <DataGridTextColumn 
+                    Header="Qty" 
+                    Binding="{Binding Qty,Mode=TwoWay}"
+                    />
+                <DataGridTextColumn 
+                    Header="Rate" 
+                    Binding="{Binding Rate,Mode=TwoWay}"/>
+                <DataGridTextColumn 
+                    Header="Tax" 
+                    Binding="{Binding Tax,Mode=TwoWay}"/>
+                <DataGridTextColumn
+                    Header="GST" 
+                    Binding="{Binding GST,Mode=TwoWay}"/>
+                <DataGridTextColumn 
+                    Header="Amt" 
+                    Binding="{Binding Amt,Mode=TwoWay}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
