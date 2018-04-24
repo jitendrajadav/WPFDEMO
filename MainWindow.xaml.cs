@@ -23,8 +23,7 @@ namespace Lesson7
 
         private void DataGrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
-            DataGridRow row = dataGrid.ItemContainerGenerator.ContainerFromItem(CollectionView.NewItemPlaceholder) as DataGridRow;
-            if (row != null)
+            if (dataGrid.ItemContainerGenerator.ContainerFromItem(CollectionView.NewItemPlaceholder) is DataGridRow row)
             {
                 dataGrid.SelectedItem = row.DataContext;
                 DataGridCell cell = Helper.GetCell(dataGrid, row, 0);
@@ -32,17 +31,6 @@ namespace Lesson7
                     dataGrid.CurrentCell = new DataGridCellInfo(cell);
             }
         }
-
-        //private static DataGridCell GetCell(DataGrid dataGrid, DataGridRow rowContainer, int column)
-        //{
-        //    if (rowContainer != null)
-        //    {
-        //        DataGridCellsPresenter presenter = Helper.FindVisualChild<DataGridCellsPresenter>(rowContainer);
-        //        if (presenter != null)
-        //            return presenter.ItemContainerGenerator.ContainerFromIndex(column) as DataGridCell;
-        //    }
-        //    return null;
-        //}
 
         private void DataGrid_PreviewKeyDown(object sender, KeyEventArgs e)
         {
@@ -52,7 +40,6 @@ namespace Lesson7
                 {
                     if (dataGrid.Columns.Count - 1 == dataGrid.CurrentCell.Column.DisplayIndex)
                     {
-                        //elementWithFocus.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
                     }
                     else
                     {
