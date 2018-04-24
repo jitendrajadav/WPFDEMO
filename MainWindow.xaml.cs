@@ -1,7 +1,10 @@
 ﻿using Lesson7.Utility;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Lesson7
 {
@@ -15,7 +18,31 @@ namespace Lesson7
             InitializeComponent();
             Loaded += MainWindow_Loaded;
             dataGrid.PreviewKeyDown += DataGrid_PreviewKeyDown;
+            dataGrid.CellEditEnding += DataGrid_CellEditEnding;
         }
+
+        private void DataGrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+            DataGridRow row = dataGrid.ItemContainerGenerator.ContainerFromItem(CollectionView.NewItemPlaceholder) as DataGridRow;
+            if (row != null)
+            {
+                dataGrid.SelectedItem = row.DataContext;
+                DataGridCell cell = Helper.GetCell(dataGrid, row, 0);
+                if (cell != null)
+                    dataGrid.CurrentCell = new DataGridCellInfo(cell);
+            }
+        }
+
+        //private static DataGridCell GetCell(DataGrid dataGrid, DataGridRow rowContainer, int column)
+        //{
+        //    if (rowContainer != null)
+        //    {
+        //        DataGridCellsPresenter presenter = Helper.FindVisualChild<DataGridCellsPresenter>(rowContainer);
+        //        if (presenter != null)
+        //            return presenter.ItemContainerGenerator.ContainerFromIndex(column) as DataGridCell;
+        //    }
+        //    return null;
+        //}
 
         private void DataGrid_PreviewKeyDown(object sender, KeyEventArgs e)
         {
