@@ -27,7 +27,6 @@ namespace Lesson7
 
             Loaded += MainWindow_Loaded;
             dataGrid.PreviewKeyDown += DataGrid_PreviewKeyDown;
-            //dataGrid.CellEditEnding += DataGrid_CellEditEnding;
         }
 
         private void DataGrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
