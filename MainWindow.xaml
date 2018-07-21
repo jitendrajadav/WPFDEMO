@@ -38,6 +38,10 @@
                 <DataGridTextColumn 
                     Header="Amt" 
                     Binding="{Binding Amt,Mode=TwoWay}"/>
+                <DataGridTextColumn
+                    Header="Paste"
+                    Binding="{Binding Name,Mode=TwoWay}"
+                    />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
