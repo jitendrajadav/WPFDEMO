@@ -1,7 +1,9 @@
-﻿using Lesson7.Models;
+﻿using GalaSoft.MvvmLight.Messaging;
+using Lesson7.Models;
 using Lesson7.Utility;
 using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -93,10 +95,36 @@ namespace Lesson7
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            SetFocusToFirstCell();
+        }
+
+        private void SetFocusToFirstCell()
+        {
+            dataGrid.Focus();
             if (Keyboard.FocusedElement is UIElement elementWithFocus)
                 elementWithFocus.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
-            Helper.SelectRowByIndex(dataGrid, dataGrid.Items.Count - 1);
+           
+            //Helper.SelectRowByIndex(dataGrid, dataGrid.Items.Count - 1);
             //Helper.SelectRowByIndex(dataGrid, 0);
+        }
+
+        private void btnClear_Click(object sender, RoutedEventArgs e)
+         {
+            Messenger.Default.Send("ClearCollection");
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            //add blank row
+            var itemsSource = dataGrid.ItemsSource as ObservableCollection<ItemModel>;
+            if (itemsSource != null)
+                itemsSource.Add(new ItemModel());
+            //SetFocusToFirstCell();
+            int index = 0;
+            dataGrid.SelectedItem = dataGrid.Items[index];
+            dataGrid.ScrollIntoView(dataGrid.Items[index]);
+            DataGridRow dgrow = (DataGridRow)dataGrid.ItemContainerGenerator.ContainerFromItem(dataGrid.Items[index]);
+            dgrow.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
         }
     }
 }

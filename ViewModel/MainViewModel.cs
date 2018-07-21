@@ -1,4 +1,5 @@
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Messaging;
 using Lesson7.Models;
 using System.Collections.ObjectModel;
 
@@ -101,14 +102,17 @@ namespace Lesson7.ViewModel
         /// </summary>
         public MainViewModel()
         {
-
+            Messenger.Default.Register<string>(this, ClearCollection);
         }
 
         #endregion
-        
-        #region Properties
 
+        #region Methods
 
+        private void ClearCollection(string vlaue)
+        {
+            ItemCollection.Clear();
+        }
 
 
         #endregion
